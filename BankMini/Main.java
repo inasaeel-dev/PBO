@@ -2,14 +2,18 @@ package BankMini;
 
 public class Main {
   public static void main(String[] args) {
-    Account original = new Account("Nadia", 500000);
-    Account copy = original;
-    copy.deposit(100000);
+    Account[] accounts = new Account[3];
 
-    System.out.println("Via original : " + original.balance);
-    System.out.println("Via copy : " + copy.balance);
+    accounts[0] = new Account("Nadia", 500000);
+    accounts[0].withdraw(150000);
 
-    Account empty = null;
-    empty.printInfo();
+    accounts[1] = new Account("Budi", 1000000);
+
+    accounts[2] = new Account("Sari", 750000);
+    accounts[2].withdraw(250000);
+
+    for (Account acc : accounts) {
+      acc.printInfo();
+    }
   }
 }
