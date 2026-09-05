@@ -7,6 +7,7 @@ public class Main {
     acc.ownerName = "Nadia";
     acc.balance = 500000;
     System.out.println(acc.ownerName + " - balance : " + acc.balance);
+    
     }
   }
 
