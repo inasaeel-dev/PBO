@@ -1,24 +1,22 @@
-package BankMini;
+package id.ac.polinema;
 
 public class Account {
   private String accountNumber;
-  private String ownerName;
+  private Customer owner;
   private double balance;
-  private double dailyWithdrawLimit;
 
-    public Account(String accountNumber,String ownerName, double balance, double dailyWithdrawLimit){
+    public Account(String accountNumber,Customer owner, double balance){
     this.accountNumber = accountNumber;
-    this.ownerName = ownerName;
+    this.owner = owner;
     this.balance = balance;
-    this.dailyWithdrawLimit = dailyWithdrawLimit;
   }
   
-  public  String getAccountNumber(){
+  public  String getAccountNumber(){ 
     return accountNumber;
   }
 
-  public String getOwnerName(){
-    return ownerName;
+  public Customer getOwner(){
+    return owner;
   }
 
   public double getBalance(){
@@ -34,13 +32,13 @@ public class Account {
   }
 
   public boolean withdraw (double amount) {
-    if(amount <= 0 || amount > balance || amount > dailyWithdrawLimit){
+    if(amount <= 0 || amount > balance){
       return false;
     }
     balance -= amount;
     return true;
   }
   public void printInfo(){
-    System.out.println(accountNumber + " - " + ownerName + " - balance : " + balance);
+    System.out.println(accountNumber + " - " + owner.getName() + " - balance : " + balance);
   }
 }
