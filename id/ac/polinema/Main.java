@@ -4,6 +4,7 @@ public class Main {
   public static void main(String[] args) {
       Customer customer1 = new Customer("Nadia", "0812-0000-0001");
       Account acc1 = new Account("A001", customer1, 500000);
+      Account acc3 = new Account("A003", customer1, 1200000);
       acc1.withdraw(150000);
       
       Customer customer2 = new Customer("Sari", "0812-0000-0002");
@@ -12,13 +13,18 @@ public class Main {
       Bank bank = new Bank(10);
       bank.addAccount(acc1);
       bank.addAccount(acc2);
+      bank.addAccount(acc3);
+      
+      System.out.println("=== Daftar Seluruh Akun Bank ===");
       bank.printAllAccounts();
 
-      Account found = bank.findAccount("A002");
-      if(found != null){
-        found.printInfo();
+      Account[] nadiaAccounts = bank.findAccountsByOwnerName("Nadia");
+      System.out.println("Jumlah akun yang ditemukan: " + nadiaAccounts.length);
+        System.out.println("Detail informasi akun:");
+        for (Account acc : nadiaAccounts) {
+            acc.printInfo();
+        }
       }
     }
-  }
 
   // anti grafiti
