@@ -3,7 +3,7 @@ package id.ac.polinema;
 public class SavingsAccount extends Account {
   private double interestRate;
 
-  public void printAccountType(String accountNumber, Customer owner, double balance, double interestRate){
+  public SavingsAccount(String accountNumber, Customer owner, double balance, double interestRate){
     super (accountNumber, owner, balance);
     this.interestRate = interestRate;
   }
