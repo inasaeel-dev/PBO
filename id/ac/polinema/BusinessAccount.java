@@ -12,5 +12,5 @@ public double getMonthlyTransactionFee(){
 }
 public void printAccountType(){
   System.out.println("Account type : Busines, monthly fee : " + monthlyTransactionFee);
-}
+  }
 }
