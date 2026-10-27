@@ -11,10 +11,10 @@ public abstract class Account {
         this.balance = balance;
     }
     public boolean withdraw(double amount) {
-        if (canWithdraw(amount)) {
-            balance -= amount;
-            return true;
-        }
+      if (canWithdraw(amount)) {
+          balance -= amount;
+          return true;
+      }
         return false;
     }
     protected boolean canWithdraw(double amount) {
@@ -33,5 +33,10 @@ public abstract class Account {
     }
     public double getBalance() {
         return balance;
+    }
+    public void deposit(double amount){
+      if(amount > 0){
+        this.balance += amount;
+      }
     }
 }
