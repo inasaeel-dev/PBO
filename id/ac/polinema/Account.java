@@ -1,56 +1,37 @@
 package id.ac.polinema;
 
-public class Account {
-  private String accountNumber;
-  private Customer owner;
-  private double balance;
+public abstract class Account {
+    private String accountNumber;
+    private Customer owner;
+    private double balance;
 
-    public Account(String accountNumber,Customer owner, double balance){
-    this.accountNumber = accountNumber;
-    this.owner = owner;
-    this.balance = balance;
-  }
-  
-  public  String getAccountNumber(){ 
-    return accountNumber;
-  }
-
-  public Customer getOwner(){
-    return owner;
-  }
-
-  public double getBalance(){
-    return balance;
-  }
-
-  public boolean deposit(double amount) {
-    if(amount <= 0){
-      return false;
+    public Account(String accountNumber, Customer owner, double balance) {
+        this.accountNumber = accountNumber;
+        this.owner = owner;
+        this.balance = balance;
     }
-    balance += amount;
-    return true;
-  }
-
-  public boolean withdraw (double amount) {
-    if(!canWithdraw(amount)){
-      return false;
+    public boolean withdraw(double amount) {
+        if (canWithdraw(amount)) {
+            balance -= amount;
+            return true;
+        }
+        return false;
     }
-    balance -= amount;
-    return true;
-  }
-
-  protected boolean canWithdraw(double amount){
-    return amount > 0 && amount <= balance;
-  }
-  public void printInfo(){
-    System.out.println(accountNumber + " - " + owner.getName() + " - balance : " + balance);
-  } 
-
-  public boolean deposit(double amount, String note){
-    if (!deposit(amount)){
-      return false;
+    protected boolean canWithdraw(double amount) {
+        return amount <= balance;
     }
-    System.out.println(accountNumber + " deposit note : " + note);
-    return true;
-  }
+    public void printInfo() {
+        System.out.println(accountNumber + " - " + owner.getName() + " - balance: " + balance);
+    }
+    public abstract double monthlyFee();
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+    public Customer getOwner() {
+        return owner;
+    }
+    public double getBalance() {
+        return balance;
+    }
 }

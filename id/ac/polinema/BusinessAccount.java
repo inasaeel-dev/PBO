@@ -12,10 +12,10 @@ public double getMonthlyTransactionFee(){
   return monthlyTransactionFee;
 }
 
-@Override 
-protected boolean canWithdraw(double amount){
-  return amount > 0 && (getBalance() - amount) >= MINIMUM_BALANCE;
-}
+// @Override 
+// protected boolean canWithdraw(double amount){
+//   return amount > 0 && (getBalance() - amount) >= MINIMUM_BALANCE;
+// }
 
 @Override 
 public void printInfo(){
