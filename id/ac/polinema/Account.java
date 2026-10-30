@@ -10,12 +10,12 @@ public abstract class Account {
         this.owner = owner;
         this.balance = balance;
     }
-    public void withdraw(double amount) throws InsufficientBalanceException {
-        if(!canWithdraw(amount)){
-            throw new InsufficientBalanceException(
+    public void withdraw(double amount) throws InsufficientBalanceException { //membuat fungsi bernama withdraw yang menerima jml amount
+        if(!canWithdraw(amount)){ // cek kondisi jika jml penarikan tidak bisa dilakukan lalu dilempar ke throw new
+            throw new InsufficientBalanceException( // kl gabisa ditarik baris ini bakal melempar error
                 accountNumber + ": insufficient balance for a withdrawal of " + amount);
         }
-        balance -= amount;
+        balance -= amount; // baris ini dijalankan ketika penarikan lolos syarat. fungsinya mengurangkan saldo saldo lama dgn nominal yg ditarik
     }
     protected boolean canWithdraw(double amount) {
         return amount <= balance;

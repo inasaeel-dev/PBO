@@ -46,9 +46,9 @@ public class Bank { // deklarasi kelas publik
       accounts[i].printInfo();
     }
   }
-  public void printMonthlyFees(){
+  public void processMonthEnd(){
     for (int i = 0; i < count; i++) {
-      System.out.println(accounts[i].getAccountNumber() + " fee: " + accounts[i].monthlyFee());
+      Account acc
     }
   }
 }
