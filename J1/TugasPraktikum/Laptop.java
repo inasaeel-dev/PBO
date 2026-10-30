@@ -1,4 +1,4 @@
-package JOBSHEET01.TugasPraktikum;
+package J1.TugasPraktikum;
 
 public class Laptop extends Elektronik{
   String prosesor;

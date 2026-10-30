@@ -1,4 +1,4 @@
-package JOBSHEET01;
+package J1;
 
 public class Bike {
     private String brand; // atribut private untuk merk

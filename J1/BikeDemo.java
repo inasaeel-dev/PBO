@@ -1,4 +1,4 @@
-package JOBSHEET01;
+package J1;
 
 public class BikeDemo {
   public static void main(String[] args) {
