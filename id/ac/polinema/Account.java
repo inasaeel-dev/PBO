@@ -10,12 +10,12 @@ public abstract class Account {
         this.owner = owner;
         this.balance = balance;
     }
-    public boolean withdraw(double amount) {
-      if (canWithdraw(amount)) {
-          balance -= amount;
-          return true;
-      }
-        return false;
+    public void withdraw(double amount) throws InsufficientBalanceException {
+        if(!canWithdraw(amount)){
+            throw new InsufficientBalanceException(
+                accountNumber + ": insufficient balance for a withdrawal of " + amount);
+        }
+        balance -= amount;
     }
     protected boolean canWithdraw(double amount) {
         return amount <= balance;
