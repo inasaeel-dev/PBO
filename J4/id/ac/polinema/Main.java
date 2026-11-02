@@ -14,9 +14,11 @@ public class Main {
     bank.addAccount(acc2);
     bank.printAllAccounts();
 
-    Account found = bank.findAccount("A002");
-    if(found != null){
-      found.printInfo();
+    Account[] nadiaAccounts = bank.findAccountsByOwnerName("Nadia");
+
+    System.out.println("Detail rekening:");
+      for (Account acc : nadiaAccounts) {
+      acc.printInfo();
     }
   }
 }
