@@ -16,14 +16,15 @@ public class Bank { // deklarasi kelas publik
     count++;
     return true;
   }
-  public Account findAccount(String accountNumber){
+  public Account findAccount(String accountNumber) throws AccountNotFoundException {
     for (int i = 0; i < count; i++) {
-      if(accounts[i].getAccountNumber().equals(accountNumber)){
-        return accounts[i];
+      if (accounts[i].getAccountNumber().equals(accountNumber)) {
+          return accounts[i];
       }
     }
-    return null;
-  }
+    // jika tidak ditemukan, melempar AccountNotFoundException (bukan return null)
+    throw new AccountNotFoundException("Account with number " + accountNumber + " not found");
+}
   public Account[] findAccountsByOwnerName(String name){
     int matchCount = 0;
     for (int i = 0; i < count; i++){
@@ -54,6 +55,14 @@ public class Bank { // deklarasi kelas publik
         System.out.println(acc.getAccountNumber() + " interest applied, new balance: " + acc.getBalance());
       }
       System.out.println(acc.getAccountNumber() + " monthly fee: " + acc.monthlyFee());
+    }
+  }
+  public void printAuditLog(){
+    for (int i = 0; i < count; i++) {
+      Account acc = accounts[i];
+      if(acc instanceof Auditable auditable){
+        System.out.println(auditable.auditLog());
+      }
     }
   }
 }

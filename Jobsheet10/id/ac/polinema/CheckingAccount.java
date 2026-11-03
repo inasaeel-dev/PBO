@@ -12,4 +12,8 @@ public class CheckingAccount extends Account implements Auditable{
     public double monthlyFee() {
         return MONTHLY_FEE; // biaya bulanan untuk Checking Account adalah 15000.0
     }
+    @Override 
+    public String auditLog(){
+      return "Audit Nomor Rekening: " + getAccountNumber() + " | Saldo: " + getBalance();
+    }
 }
