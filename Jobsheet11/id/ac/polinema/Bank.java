@@ -1,0 +1,68 @@
+package Jobsheet11.id.ac.polinema; //package atau folder
+
+public class Bank { // deklarasi kelas publik
+  private Account[] accounts; // atribut array untuk menyimpan daftar akun bank
+  private int count; // untuk mencatat jumlah akun yang saat ini sudah tersimpan di dalam array
+
+  public Bank (int capacity){ // konstruktor yang menerima parameter kapasitas maksimal array
+    accounts = new Account[capacity]; // inisialisasi array dengan ukuran sebesar nilai kapasitas saat pemanggilan konstruktor
+    count = 0; // nilai variabel 0 karena bank masih kosong
+  }
+  public boolean addAccount(Account account){ // untuk menambahkan objek akun baru, mengembalikan nilai boolean
+    if (count >= accounts.length){ //pengecekan kondisi jumlah akun saat ini sudah mencapai kapasitas atau melebihi kapasitas maksimum array
+      return false; // jika kapasitas penuh, method berhenti dan mengembalikan nilai/gagal menambah akun
+    }
+    accounts[count] = account; //
+    count++;
+    return true;
+  }
+  public Account findAccount(String accountNumber) throws AccountNotFoundException {
+    for (int i = 0; i < count; i++) {
+      if (accounts[i].getAccountNumber().equals(accountNumber)) {
+          return accounts[i];
+      }
+    }
+    // jika tidak ditemukan, melempar AccountNotFoundException (bukan return null)
+    throw new AccountNotFoundException("Account with number " + accountNumber + " not found");
+}
+  public Account[] findAccountsByOwnerName(String name){
+    int matchCount = 0;
+    for (int i = 0; i < count; i++){
+      if (accounts[i].getOwner().getName().equals(name)){
+        matchCount++;
+      }
+    }
+    Account[] matches = new Account[matchCount];
+    int index = 0;
+    for (int i = 0; i < count; i++) {
+      if (accounts[i].getOwner().getName().equals(name)){
+        matches[index] = accounts[i];
+        index++;
+      }
+    }
+    return matches;
+  }
+  public void printAllAccounts(){
+    for (int i = 0; i < count; i++) {
+      accounts[i].printInfo();
+    }
+  }
+  public void processMonthEnd(){
+    for (int i = 0; i < count; i++) {
+      Account acc =  accounts[i];
+      if (acc instanceof InterestBearing bearing) {
+        bearing.applyInterest();
+        System.out.println(acc.getAccountNumber() + " interest applied, new balance: " + acc.getBalance());
+      }
+      System.out.println(acc.getAccountNumber() + " monthly fee: " + acc.monthlyFee());
+    }
+  }
+  public void printAuditLog(){
+    for (int i = 0; i < count; i++) {
+      Account acc = accounts[i];
+      if(acc instanceof Auditable auditable){
+        System.out.println(auditable.auditLog());
+      }
+    }
+  }
+}
