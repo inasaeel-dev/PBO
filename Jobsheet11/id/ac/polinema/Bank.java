@@ -1,51 +1,96 @@
 package Jobsheet11.id.ac.polinema; //package atau folder
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+// import java.util.LinkedHashMap;
+// import java.util.Map;
 
-public class Bank { // deklarasi kelas publik
-  private AccountRepository repository;
+public class Bank {
+   private AccountRepository repository;
 
-  public Bank(AccountRepository repository){
-    this.repository = repository;
-  }
-  public boolean addAccount(Account account){
-    if (repository.findByNumber(account.getAccountNumber()) != null){
-      return false;
+    public Bank(AccountRepository repository) {
+        this.repository = repository;
     }
-    repository.save(account);
-    return true;
-  }
-  public Account finAccount(String accountNumber){
-    return repository.findByNumber(accountNumber);
-  }
-  public void printAllAccounts(){
-    for (Account acc : repository.findAll()){
-      acc.printInfo();
+    public boolean addAccount(Account account) {
+        if (repository.findByNumber(account.getAccountNumber()) != null) {
+            return false;
+        }
+        repository.save(account);
+        return true;
     }
-  }
-  public void printMonthlyFees(){
-    for (Account acc : repository.findAll()){
-      System.out.println(acc.getAccountNumber() + " fee : " + acc.monthlyFee());
+    public Account findAccount(String accountNumber) {
+        return repository.findByNumber(accountNumber);
     }
-  }
-  public void processMonthEnd(){
-    for (Account acc : repository.findAll()){
-      if (acc instanceof InterestBearing bearing){
-        bearing.applyInterest();
-        System.out.println(acc.getAccountNumber() + " interest applied, new balance : " + acc.getBalance());
-      }
-      System.out.println(acc.getAccountNumber() + " monthly fee : " + acc.monthlyFee());
+    public void printAllAccounts() {
+        for (Account acc : repository.findAll()) {
+            acc.printInfo();
+        }
     }
-  }
-  public void printHistory(String accountNumber){
-    Account acc = finAccount(accountNumber);
-    if(acc == null) {
-      System.out.println("Account not found : " + accountNumber);
-      return ;
+    public void printMonthlyFees() {
+        for (Account acc : repository.findAll()) {
+            System.out.println(acc.getAccountNumber() + " fee: " + acc.monthlyFee());
+        }
     }
-    for (Transaction t : acc.getHistory()){
-      System.out.println(accountNumber + " " + t);
+    public void processMonthEnd() {
+        for (Account acc : repository.findAll()) {
+            if (acc instanceof InterestBearing bearing) {
+                bearing.applyInterest();
+                System.out.println(acc.getAccountNumber() + " interest applied, new balance: " + acc.getBalance());
+            }
+            System.out.println(acc.getAccountNumber() + " monthly fee: " + acc.monthlyFee());
+        }
     }
-  }
+    public void printHistory(String accountNumber) {
+        Account acc = findAccount(accountNumber);
+        if (acc == null) {
+            System.out.println("Account not found: " + accountNumber);
+            return;
+        }
+        for (Transaction t : acc.getHistory()) {
+            System.out.println(accountNumber + " " + t);
+        }
+    }
 }
+
+  // private AccountRepository repository;
+
+  // public Bank(AccountRepository repository){
+  //   this.repository = repository;
+  // }
+  // public boolean addAccount(Account account){
+  //   if (repository.findByNumber(account.getAccountNumber()) != null){
+  //     return false;
+  //   }
+  //   repository.save(account);
+  //   return true;
+  // }
+  // public Account finAccount(String accountNumber){
+  //   return repository.findByNumber(accountNumber);
+  // }
+  // public void printAllAccounts(){
+  //   for (Account acc : repository.findAll()){
+  //     acc.printInfo();
+  //   }
+  // }
+  // public void printMonthlyFees(){
+  //   for (Account acc : repository.findAll()){
+  //     System.out.println(acc.getAccountNumber() + " fee : " + acc.monthlyFee());
+  //   }
+  // }
+  // public void processMonthEnd(){
+  //   for (int i = 0; i < count; i++) {
+  //     Account acc = accounts[i];
+  //     if (acc instanceof InterestBearing bearing){
+  //       bearing.applyInterest();
+  //       System.out.println(acc.getAccountNumber() + " interest applied, new balance : " + acc.getBalance());
+  //     }
+  //   }
+  // }
+  // public void printHistory(String accountNumber){
+  //   Account acc = finAccount(accountNumber);
+  //   if(acc == null) {
+  //     System.out.println("Account not found : " + accountNumber);
+  //     return ;
+  //   }
+  //   for (Transaction t : acc.getHistory()){
+  //     System.out.println(accountNumber + " " + t);
+  //   }
+  // }
