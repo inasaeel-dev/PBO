@@ -1,9 +1,13 @@
 package Jobsheet11.id.ac.polinema;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Account {
     private String accountNumber;
     private Customer owner;
     private double balance;
+    private List<Transaction> history = new ArrayList<>();
 
     public Account(String accountNumber, Customer owner, double balance) {
         this.accountNumber = accountNumber;
@@ -15,7 +19,8 @@ public abstract class Account {
             throw new InsufficientBalanceException( // kl gabisa ditarik baris ini bakal melempar error
                 accountNumber + ": insufficient balance for a withdrawal of " + amount);
         }
-        balance -= amount; // baris ini dijalankan ketika penarikan lolos syarat. fungsinya mengurangkan saldo saldo lama dgn nominal yg ditarik
+        balance -= amount; // baris ini dijalankan ketika penarikan lolos syarat. fungsinya mengurangkan saldo lama dgn nominal yg ditarik
+        history.add(new Transaction(TransactionType.WITHDRAW, amount));
     }
     protected boolean canWithdraw(double amount) {
         return amount <= balance;
@@ -34,9 +39,16 @@ public abstract class Account {
     public double getBalance() {
         return balance;
     }
-    public void deposit(double amount){
-      if(amount > 0){
-        this.balance += amount;
-      }
+    public List<Transaction> getHistory(){
+        return history;
     }
+    public boolean deposit(double amount){
+      if(amount <= 0){
+        return false;
+      }
+      balance += amount;
+      history.add(new Transaction(TransactionType.DEPOSIT, amount));
+      return true;
+    }
+
 }
